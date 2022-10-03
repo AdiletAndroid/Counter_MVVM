@@ -4,18 +4,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".ui.mainActivity.MainActivity">
 
     <fragment
         android:id="@+id/fragment1"
-        android:name="com.example.countermvvm.fragments.UpperFragment"
+        android:name="com.example.countermvvm.ui.fragments.UpperFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1" />
 
     <fragment
         android:id="@+id/fragment2"
-        android:name="com.example.countermvvm.fragments.DownFragment"
+        android:name="com.example.countermvvm.ui.fragments.DownFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1" />

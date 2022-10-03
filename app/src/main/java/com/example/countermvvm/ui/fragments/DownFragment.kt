@@ -1,4 +1,4 @@
-package com.example.countermvvm.fragments
+package com.example.countermvvm.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -21,13 +21,6 @@ class DownFragment : Fragment() {
     ): View {
         viewModel = ViewModelProvider(requireActivity())[ViewModel::class.java]
         binding = FragmentDownBinding.inflate(inflater)
-        binding.buttonIncrement.setOnClickListener {
-            viewModel.increment()
-        }
-
-        binding.buttonDecrement.setOnClickListener {
-            viewModel.decrement()
-        }
 
         return binding.root
     }

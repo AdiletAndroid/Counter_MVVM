@@ -1,4 +1,4 @@
-package com.example.countermvvm
+package com.example.countermvvm.ui.mainActivity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
