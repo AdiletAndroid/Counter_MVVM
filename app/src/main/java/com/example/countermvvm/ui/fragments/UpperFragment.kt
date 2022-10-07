@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.countermvvm.core.UIState
 import com.example.countermvvm.databinding.FragmentUpperBinding
+import com.example.countermvvm.model.Person
 import com.example.countermvvm.viewModel.ViewModel
 
 class UpperFragment : Fragment() {
@@ -24,23 +25,19 @@ class UpperFragment : Fragment() {
         viewModel = ViewModelProvider(requireActivity())[ViewModel::class.java]
         binding = FragmentUpperBinding.inflate(inflater)
 
-        viewModel.getAllPersons()
-
-        viewModel.personsLiveData.observe(requireActivity()) { state ->
-            when (state) {
-                is UIState.Loading -> {
-                    binding.progressBar.isVisible = true
-                }
-                is UIState.Error -> {
-                    binding.progressBar.isVisible = false
-                }
-                is UIState.Success -> {
-                    binding.progressBar.isVisible = false
-                    binding.textViewCounter.text = state.data.toString()
-                }
-            }
-        }
-
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.buttonAdd.setOnClickListener {
+            val name = binding.editTextName.text.toString()
+            val age = binding.editTextAge.text.toString()
+
+            val person = Person(name = name, age = age.toInt())
+
+            viewModel.saveToDatabase(person)
+        }
     }
 }

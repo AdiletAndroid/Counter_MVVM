@@ -9,35 +9,21 @@ import com.example.countermvvm.room.PersonEntity
 
 class Repository(private val personDao: PersonDao) {
 
-
-    val getAll: LiveData<List<PersonEntity>> = personDao.getAll()
-
-    fun addUser(person: PersonEntity) {
-        personDao.insert(person)
-    }
-
-    fun deleteUser(person: PersonEntity){
-        personDao.delete(person)
-    }
-
-    private val data = mutableListOf<Person>()
-
-    fun addPerson(person: Person): LiveData<Resource<Person>> = liveData {
+    fun getAllPersons(): List<Person> {
         Resource.Loading(null)
-        Resource.Success(data.add(person))
-    }
-
-    fun getAllPersons(): LiveData<Resource<MutableList<Person>>> {
-        Resource.Loading(null)
-        return liveData {
-            Resource.Success(data)
+        return personDao.getAll().map {
+            Person(
+                passportId = it.passportId,
+                age = it.age,
+                name = it.firstName
+            )
         }
     }
 
-    fun deletePerson(person: Person): LiveData<Resource<Person>> = liveData {
-        Resource.Loading(null)
-        Resource.Success(person)
-
+    fun saveToDatabase(person: Person) {
+        val entity =
+            PersonEntity(passportId = person.passportId, firstName = person.name, age = person.age)
+        personDao.insert(entity)
     }
 
 }

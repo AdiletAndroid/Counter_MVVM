@@ -11,7 +11,7 @@ import com.example.countermvvm.model.Person
 interface PersonDao {
 
     @Query("SELECT * FROM Person ORDER BY firstName ASC")
-    fun getAll(): LiveData<List<PersonEntity>>
+    fun getAll(): List<PersonEntity>
 
     @Insert
     fun insert(person: PersonEntity)
